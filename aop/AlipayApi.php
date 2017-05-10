@@ -12,8 +12,9 @@ namespace Alipay;
 
 class AlipayApi
 {
-    
+
     public static $selfInstance = array();
+    public static $selfInstanceRequest = array();
 
 
     /**
@@ -41,11 +42,11 @@ class AlipayApi
      * @return mixed
      */
     public static function request($className){
-        if(!array_key_exists($className, self::$selfInstance)){
+        if(!array_key_exists($className, self::$selfInstanceRequest)){
             $request_name = __NAMESPACE__ . '\\request\\' . $className;
             $request = new $request_name();
-            self::$selfInstance[$className] = $request;
+            self::$selfInstanceRequest[$className] = $request;
         }
-        return self::$selfInstance[$className];
+        return self::$selfInstanceRequest[$className];
     }
 }
